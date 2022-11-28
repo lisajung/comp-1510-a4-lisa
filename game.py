@@ -101,9 +101,41 @@ def make_board(rows, columns):
     for index in range(len(classroom_locations)):
         board[classroom_locations[index]] = class_descriptions[index]
     print(board)
+    return board
 
 
 make_board(5, 5)
+
+
+def get_character_location(character):
+    """
+    Retreive the character's location on the board.
+    :param character: a dictionary representing the character
+    :return: a tuple representing the character's location
+    """
+    character_location = (character[X_COORD_KEY], character[Y_COORD_KEY])
+    return character_location
+
+
+def describe_current_location(board, character):
+    """
+    This function describes where the character is on the board.
+    :param board: a dictionary representing the game board
+    :param character: a dictionary representing the character
+    :return: a string describing the location
+    """
+    location_description = board[get_character_location(character)]
+    print(location_description)
+    return location_description
+
+board = make_board(5,5)
+character = make_character()
+describe_current_location(board, character)
+
+
+
+
+
 
 
 def main():
