@@ -159,7 +159,49 @@ def get_user_choice():
     return ask_which_direction
 
 
+def validate_move():
+    location = get_character_location(character)
+    direction_chosen = get_user_choice()
+    if direction_chosen == 1:
+        if location[0] == 0:
+            print("There is no room in that direction. Let's choose another direction!")
+            validate_move()
+        else:
+            new_location = list(get_character_location(character))
+            new_location[0] -= 1
+            print(new_location)
+    if direction_chosen == 2:
+        if location[1] == 4:
+            print("There is no room in that direction. Let's choose another direction!")
+            validate_move()
+        else:
+            new_location = list(get_character_location(character))
+            new_location[1] += 1
+            print(new_location)
+    if direction_chosen == 3:
+        if location[0] == 4:
+            print("There is no room in that direction. Let's choose another direction!")
+            validate_move()
+        else:
+            new_location = list(get_character_location(character))
+            new_location[0] += 1
+            print(new_location)
+    if direction_chosen == 4:
+        if location[1] == 0:
+            print("There is no room in that direction. Let's choose another direction!")
+            validate_move()
+        else:
+            new_location = list(get_character_location(character))
+            new_location[1] -= 1
+            print(new_location)
 
+
+
+
+
+
+
+validate_move()
 
 
 def main():
