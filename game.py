@@ -87,6 +87,7 @@ def make_board(rows, columns):
     for row in range(rows):
         for column in range(columns):
             possible_locations.append((row, column))
+    print(possible_locations)
     # Generate a random selection of class locations for our classes
     classroom_locations = random.sample(possible_locations, len(CLASSES))
     print(classroom_locations)
@@ -114,6 +115,7 @@ def get_character_location(character):
     :return: a tuple representing the character's location
     """
     character_location = (character[X_COORD_KEY], character[Y_COORD_KEY])
+    print(character_location)
     return character_location
 
 
@@ -131,6 +133,46 @@ def describe_current_location(board, character):
 board = make_board(5,5)
 character = make_character()
 describe_current_location(board, character)
+
+def which_direction():
+    """
+    Generates an enumerated list representing the direction a user can move
+    :return: an enumerated list of all possible directions a user can travel
+    """
+    possible_directions = ["North", "East", "South", "West"]
+    for i, direction in enumerate(possible_directions, 1):
+        print(i, ":", direction)
+
+def get_user_choice(character):
+    """
+    Ask user which direction they want to move on the board.
+    :param character_location: a tuple representing the character's location
+    :return: a tuple representing the coordinates the user wishes to travel to
+    1 = (-1, 0)
+    2 = (0, 1)
+    3 = (1, 0)
+    4 = (0, -1)
+    """
+    print("I'm bored of this room...let's move to a different one.\n"
+    "Which direction should we go? North? East? South? West?")
+    which_direction()
+    ask_which_direction = input("\nChoose a direction by typing one of the following (1, 2, 3, or 4):")
+    ask_which_direction = int(ask_which_direction)
+    new_location = describe_current_location(board, character)
+    if ask_which_direction == 1:
+        new_location =
+
+
+
+
+
+
+
+
+get_user_choice(character)
+
+
+
 
 
 
