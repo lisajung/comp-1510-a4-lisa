@@ -130,9 +130,11 @@ def describe_current_location(board, character):
     print(location_description)
     return location_description
 
-board = make_board(5,5)
+
+board = make_board(5, 5)
 character = make_character()
 describe_current_location(board, character)
+
 
 def which_direction():
     """
@@ -143,38 +145,18 @@ def which_direction():
     for i, direction in enumerate(possible_directions, 1):
         print(i, ":", direction)
 
-def get_user_choice(character):
+
+def get_user_choice():
     """
     Ask user which direction they want to move on the board.
     :param character_location: a tuple representing the character's location
     :return: a tuple representing the coordinates the user wishes to travel to
-    1 = (-1, 0)
-    2 = (0, 1)
-    3 = (1, 0)
-    4 = (0, -1)
     """
-    print("I'm bored of this room...let's move to a different one.\n"
-    "Which direction should we go? North? East? South? West?")
+    print("Lets go to a different room. Which direction should we go?")
     which_direction()
     ask_which_direction = input("\nChoose a direction by typing one of the following (1, 2, 3, or 4):")
     ask_which_direction = int(ask_which_direction)
-    new_location = describe_current_location(board, character)
-    if ask_which_direction == 1:
-        new_location =
-
-
-
-
-
-
-
-
-get_user_choice(character)
-
-
-
-
-
+    return ask_which_direction
 
 
 
