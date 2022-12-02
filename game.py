@@ -5,36 +5,39 @@ A01332998
 import random
 
 
-def game():  # called from main
-    rows = 5
-    columns = 5
-    board = make_board(rows, columns)
-    character = make_character("Player name")
-    achieved_goal = False
-    # while not achieved_goal:
-    #     // Tell the user where they are
-    #     describe_current_location(board, character)
-    #     direction = get_user_choice( )
-    #     valid_move = validate_move(board, character, direction)
-    #     if valid_move:
-    #         move_character(character)
-    #         describe_current_location(board, character)
-    #         there_is_a_challenge = check_for_challenges()
-    #         if there_is_a_challenge:
-    #             execute_challenge_protocol(character)
-    #             if character_has_leveled():
-    #                 execute_glow_up_protocol()
-    #         achieved_goal = check_if_goal_attained(board, character)
-    #     else:
-    #         // Tell the user they can’t go in that direction
-    #         // Print end of game stuff like congratulations or sorry you died
-
-
 NAME_KEY = "Name"
 X_COORD_KEY = "X-coordinate"
 Y_COORD_KEY = "Y-coordinate"
 CURRENT_EGO_KEY = "Current Ego"
 MAX_EGO_KEY = "Max Ego"
+
+
+def game():  # called from main
+    rows = 5
+    columns = 5
+    board = make_board(rows, columns)
+    character = make_character()
+    achieved_goal = False
+    while not achieved_goal:
+        describe_current_location(board, character)
+        direction = get_user_choice()
+        valid_move = validate_move(character, direction)
+        if valid_move:
+            move_character(character, direction)
+            describe_current_location(board, character)
+            there_is_a_challenge = check_for_challenges(character, board)
+            if there_is_a_challenge:
+                print("Found a challenge")
+            else:
+                print("No challenge here")
+    #             execute_challenge_protocol(character)
+    #             if character_has_leveled():
+    #                 execute_glow_up_protocol()
+    #         achieved_goal = check_if_goal_attained(board, character)
+        else:
+            print("That's a wall smarty pants. Choose another direction.")
+    #         // Tell the user they can’t go in that direction
+    #         // Print end of game stuff like congratulations or sorry you died
 
 
 def make_character():
@@ -68,6 +71,7 @@ def challenge_integrals():
     print("Time for addition!")
 
 
+
 """This dictionary represents the classroom description as the key and the challenge function that corresponds with 
 the class. """
 CLASSES = {"Addition": challenge_addition, "Subtraction": challenge_subtraction,
@@ -87,25 +91,21 @@ def make_board(rows, columns):
     for row in range(rows):
         for column in range(columns):
             possible_locations.append((row, column))
-    print(possible_locations)
     # Generate a random selection of class locations for our classes
-    classroom_locations = random.sample(possible_locations, len(CLASSES))
+    possible_classroom_locations = possible_locations
+    possible_classroom_locations.remove((0, 0))
+    classroom_locations = random.sample(possible_classroom_locations, len(CLASSES))
     print(classroom_locations)
     board = {}
     # Populate an "empty room" board with the keys being the location and the value being the description.
     for row in range(rows):
         for column in range(columns):
             board[(row, column)] = "empty room"
-    print(board)
     # Replace all locations that have a class with the given class's description
     class_descriptions = list(CLASSES.keys())
     for index in range(len(classroom_locations)):
         board[classroom_locations[index]] = class_descriptions[index]
-    print(board)
     return board
-
-
-make_board(5, 5)
 
 
 def get_character_location(character):
@@ -115,7 +115,6 @@ def get_character_location(character):
     :return: a tuple representing the character's location
     """
     character_location = (character[X_COORD_KEY], character[Y_COORD_KEY])
-    print(character_location)
     return character_location
 
 
@@ -124,16 +123,10 @@ def describe_current_location(board, character):
     This function describes where the character is on the board.
     :param board: a dictionary representing the game board
     :param character: a dictionary representing the character
-    :return: a string describing the location
     """
-    location_description = board[get_character_location(character)]
-    print(location_description)
-    return location_description
-
-
-board = make_board(5, 5)
-character = make_character()
-describe_current_location(board, character)
+    location = board[get_character_location(character)]
+    print("You are currently at " + location + ".")
+    print("Debug: " + str(get_character_location(character)[0]) + ", " + str(get_character_location(character)[1]))
 
 
 def which_direction():
@@ -155,41 +148,42 @@ def get_user_choice():
     print("Lets go to a different room. Which direction should we go?")
     which_direction()
     ask_which_direction = input("\nChoose a direction by typing one of the following (1, 2, 3, or 4):")
-    ask_which_direction = str(ask_which_direction)
     if ask_which_direction == "1" or ask_which_direction == "2" or ask_which_direction == "3" or ask_which_direction == "4":
-        return ask_which_direction
+        return int(ask_which_direction)
     else:
         print("There's no room in that direction. Let's choose another direction!")
         get_user_choice()
 
 
-def validate_move(direction_chosen):
+def validate_move(character, direction_chosen):
     location = get_character_location(character)
     if direction_chosen == 1:
-        return location[0] != 0
-    if direction_chosen == 2:
-        return location[1] != 4
-    if direction_chosen == 3:
-        return location[0] != 4
-    if direction_chosen == 4:
         return location[1] != 0
+    if direction_chosen == 2:
+        return location[0] != 4
+    if direction_chosen == 3:
+        return location[1] != 4
+    if direction_chosen == 4:
+        return location[0] != 0
     return False
 
 
-#
-#
-#
-#
-#
-#
-#
-# validate_move()
-direction = get_user_choice()
-validate_move(direction)
+def move_character(character, direction):
+    if direction == 1:
+        character[Y_COORD_KEY] = character[Y_COORD_KEY] - 1
+    elif direction == 2:
+        character[X_COORD_KEY] = character[X_COORD_KEY] + 1
+    elif direction == 3:
+        character[Y_COORD_KEY] = character[Y_COORD_KEY] + 1
+    elif direction == 4:
+        character[X_COORD_KEY] = character[X_COORD_KEY] - 1
+
+
+
 
 
 def main():
-    pass
+    game()
 
 
 if __name__ == "__main__":
