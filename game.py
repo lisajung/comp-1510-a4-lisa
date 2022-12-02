@@ -155,53 +155,37 @@ def get_user_choice():
     print("Lets go to a different room. Which direction should we go?")
     which_direction()
     ask_which_direction = input("\nChoose a direction by typing one of the following (1, 2, 3, or 4):")
-    ask_which_direction = int(ask_which_direction)
-    return ask_which_direction
+    ask_which_direction = str(ask_which_direction)
+    if ask_which_direction == "1" or ask_which_direction == "2" or ask_which_direction == "3" or ask_which_direction == "4":
+        return ask_which_direction
+    else:
+        print("There's no room in that direction. Let's choose another direction!")
+        get_user_choice()
 
 
-def validate_move():
+def validate_move(direction_chosen):
     location = get_character_location(character)
-    direction_chosen = get_user_choice()
     if direction_chosen == 1:
-        if location[0] == 0:
-            print("There is no room in that direction. Let's choose another direction!")
-            validate_move()
-        else:
-            new_location = list(get_character_location(character))
-            new_location[0] -= 1
-            print(new_location)
+        return location[0] != 0
     if direction_chosen == 2:
-        if location[1] == 4:
-            print("There is no room in that direction. Let's choose another direction!")
-            validate_move()
-        else:
-            new_location = list(get_character_location(character))
-            new_location[1] += 1
-            print(new_location)
+        return location[1] != 4
     if direction_chosen == 3:
-        if location[0] == 4:
-            print("There is no room in that direction. Let's choose another direction!")
-            validate_move()
-        else:
-            new_location = list(get_character_location(character))
-            new_location[0] += 1
-            print(new_location)
+        return location[0] != 4
     if direction_chosen == 4:
-        if location[1] == 0:
-            print("There is no room in that direction. Let's choose another direction!")
-            validate_move()
-        else:
-            new_location = list(get_character_location(character))
-            new_location[1] -= 1
-            print(new_location)
+        return location[1] != 0
+    return False
 
 
-
-
-
-
-
-validate_move()
+#
+#
+#
+#
+#
+#
+#
+# validate_move()
+direction = get_user_choice()
+validate_move(direction)
 
 
 def main():
