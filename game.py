@@ -20,7 +20,8 @@ def game():  # called from main
     board = make_board(rows, columns)
     character = make_character()
     achieved_goal = False
-    while not achieved_goal:
+    challenge_addition(character)
+    while not achieved_goal and character[CURRENT_EGO_KEY] > 0:
         describe_current_location(board, character)
         direction = get_user_choice()
         valid_move = validate_move(character, direction)
@@ -53,7 +54,7 @@ def make_character():
 
 def check_for_level_up_two(character):
     if character[EXP_KEY] == 100:
-        print(r"""\
+        print(r"""
                     ╭╮╱╱╱╱╱╱╱╱╱╭╮
                     ┃┃╱╱╱╱╱╱╱╱╱┃┃
                     ┃┃╭━━┳╮╭┳━━┫┃╱╭╮╭┳━━╮
@@ -65,6 +66,7 @@ def check_for_level_up_two(character):
         """)
         print("Congrats! You are now level 2!")
         character[LEVEL_KEY] += 1
+        character[CURRENT_EGO_KEY] = 100
     else:
         return
 
@@ -101,23 +103,23 @@ def challenge_addition(character):
             print(character)
             check_for_level_up_two(character)
         else:
-            character[CURRENT_EGO_KEY] = character[CURRENT_EGO_KEY] - 50
+            character[CURRENT_EGO_KEY] = character[CURRENT_EGO_KEY] - 100
             if character[CURRENT_EGO_KEY] == 0:
                 print("game over")
-    elif character[LEVEL_KEY] == 2:
-        print("What is 36 + 17?")
-        print("a: 54")
-        print("b: 53")
-        print("c: 52")
-        print("d: 56")
-        character_answer = input("Choose one of a, b, c, or d. Type your answer here:")
-        if character_answer.lower == "b":
-            character[EXP_KEY] = character[EXP_KEY] + 50
-            check_for_level_up_three(character)
-        else:
-            character[CURRENT_EGO_KEY] = character[CURRENT_EGO_KEY] - 50
-            if character[CURRENT_EGO_KEY] == 0:
-                print("game over")
+    # elif character[LEVEL_KEY] == 2:
+    #     print("What is 36 + 17?")
+    #     print("a: 54")
+    #     print("b: 53")
+    #     print("c: 52")
+    #     print("d: 56")
+    #     character_answer = input("Choose one of a, b, c, or d. Type your answer here:")
+    #     if character_answer.lower == "b":
+    #         character[EXP_KEY] = character[EXP_KEY] + 50
+    #         check_for_level_up_three(character)
+    #     else:
+    #         character[CURRENT_EGO_KEY] = character[CURRENT_EGO_KEY] - 50
+    #         if character[CURRENT_EGO_KEY] == 0:
+    #             print("game over")
 
 
 def challenge_subtraction():
