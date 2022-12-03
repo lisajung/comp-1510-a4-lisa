@@ -24,7 +24,7 @@ def game():  # called from main
         valid_move = validate_move(character, direction)
         if valid_move:
             move_character(character, direction)
-            describe_current_location(board, character)
+            #describe_current_location(board, character)
             there_is_a_challenge = check_for_challenges(character, board)
             if there_is_a_challenge:
                 print("Found a challenge")
@@ -126,7 +126,8 @@ def describe_current_location(board, character):
     """
     location = board[get_character_location(character)]
     print("You are currently at " + location + ".")
-    print("Debug: " + str(get_character_location(character)[0]) + ", " + str(get_character_location(character)[1]))
+    print("The coordinates of the room you are in are (" + str(get_character_location(character)[0])
+          + ", " + str(get_character_location(character)[1]) + ")")
 
 
 def which_direction():
@@ -152,7 +153,7 @@ def get_user_choice():
         return int(ask_which_direction)
     else:
         print("There's no room in that direction. Let's choose another direction!")
-        get_user_choice()
+        return get_user_choice()
 
 
 def validate_move(character, direction_chosen):
@@ -177,6 +178,11 @@ def move_character(character, direction):
         character[Y_COORD_KEY] = character[Y_COORD_KEY] + 1
     elif direction == 4:
         character[X_COORD_KEY] = character[X_COORD_KEY] - 1
+
+
+def check_for_challenges(character, board):
+    location = board[get_character_location(character)]
+    return location in CLASSES.keys()
 
 
 
