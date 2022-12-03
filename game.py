@@ -10,6 +10,8 @@ X_COORD_KEY = "X-coordinate"
 Y_COORD_KEY = "Y-coordinate"
 CURRENT_EGO_KEY = "Current Ego"
 MAX_EGO_KEY = "Max Ego"
+LEVEL_KEY = "Character Level"
+EXP_KEY = "Experience"
 
 
 def game():  # called from main
@@ -28,9 +30,11 @@ def game():  # called from main
             there_is_a_challenge = check_for_challenges(character, board)
             if there_is_a_challenge:
                 print("Found a challenge")
+                execute_challenge_protocol(character, board)
+                # if character_has_leveled():
+                #     execute_glow_up_protocol()
             else:
                 print("No challenge here")
-    #             execute_challenge_protocol(character)
     #             if character_has_leveled():
     #                 execute_glow_up_protocol()
     #         achieved_goal = check_if_goal_attained(board, character)
@@ -44,31 +48,96 @@ def make_character():
     character_name = input("Oh hey....buddy...welcome to finals season! "
                            "We've placed study sessions in classrooms \nthroughout the school for you to "
                            "prepare for finals! \n\nPlease write your name on this nametag *give you nametag* : ")
-    return {NAME_KEY: character_name, X_COORD_KEY: 0, Y_COORD_KEY: 0, CURRENT_EGO_KEY: 100, MAX_EGO_KEY: 100}
+    return {NAME_KEY: character_name, X_COORD_KEY: 0, Y_COORD_KEY: 0, CURRENT_EGO_KEY: 100, MAX_EGO_KEY: 100, LEVEL_KEY: 1, EXP_KEY: 0}
 
 
-def challenge_addition():
+def check_for_level_up_two(character):
+    if character[EXP_KEY] == 100:
+        print(r"""\
+                    ╭╮╱╱╱╱╱╱╱╱╱╭╮
+                    ┃┃╱╱╱╱╱╱╱╱╱┃┃
+                    ┃┃╭━━┳╮╭┳━━┫┃╱╭╮╭┳━━╮
+                    ┃┃┃┃━┫╰╯┃┃━┫┃╱┃┃┃┃╭╮┃
+                    ┃╰┫┃━╋╮╭┫┃━┫╰╮┃╰╯┃╰╯┃
+                    ╰━┻━━╯╰╯╰━━┻━╯╰━━┫╭━╯
+                    ╱╱╱╱╱╱╱╱╱╱╱╱╱╱╱╱╱┃┃
+                    ╱╱╱╱╱╱╱╱╱╱╱╱╱╱╱╱╱╰╯
+        """)
+        print("Congrats! You are now level 2!")
+        character[LEVEL_KEY] += 1
+    else:
+        return
+
+
+def check_for_level_up_three(character):
+    if character[EXP_KEY] == 250:
+        print(r"""\
+                    ╭╮╱╱╱╱╱╱╱╱╱╭╮
+                    ┃┃╱╱╱╱╱╱╱╱╱┃┃
+                    ┃┃╭━━┳╮╭┳━━┫┃╱╭╮╭┳━━╮
+                    ┃┃┃┃━┫╰╯┃┃━┫┃╱┃┃┃┃╭╮┃
+                    ┃╰┫┃━╋╮╭┫┃━┫╰╮┃╰╯┃╰╯┃
+                    ╰━┻━━╯╰╯╰━━┻━╯╰━━┫╭━╯
+                    ╱╱╱╱╱╱╱╱╱╱╱╱╱╱╱╱╱┃┃
+                    ╱╱╱╱╱╱╱╱╱╱╱╱╱╱╱╱╱╰╯
+        """)
+        print("Congrats! You are now level 3!")
+        character[LEVEL_KEY] += 3
+    else:
+        return
+
+
+def challenge_addition(character):
     print("Time for addition!")
+    if character[LEVEL_KEY] == 1:
+        print("What is 5 + 5?")
+        print("a: 30")
+        print("b: 16")
+        print("c: 5")
+        print("d: 10")
+        answer = input("Choose one of a, b, c, or d. Type your answer here:")
+        if answer.lower() == "d":
+            character[EXP_KEY] = character[EXP_KEY] + 50
+            print(character)
+            check_for_level_up_two(character)
+        else:
+            character[CURRENT_EGO_KEY] = character[CURRENT_EGO_KEY] - 50
+            if character[CURRENT_EGO_KEY] == 0:
+                print("game over")
+    elif character[LEVEL_KEY] == 2:
+        print("What is 36 + 17?")
+        print("a: 54")
+        print("b: 53")
+        print("c: 52")
+        print("d: 56")
+        character_answer = input("Choose one of a, b, c, or d. Type your answer here:")
+        if character_answer.lower == "b":
+            character[EXP_KEY] = character[EXP_KEY] + 50
+            check_for_level_up_three(character)
+        else:
+            character[CURRENT_EGO_KEY] = character[CURRENT_EGO_KEY] - 50
+            if character[CURRENT_EGO_KEY] == 0:
+                print("game over")
 
 
 def challenge_subtraction():
-    print("Time for addition!")
+    print("Time for subtraction!")
 
 
 def challenge_multiplication():
-    print("Time for addition!")
+    print("Time for multiplication!")
 
 
 def challenge_division():
-    print("Time for addition!")
+    print("Time for division!")
 
 
 def challenge_derivatives():
-    print("Time for addition!")
+    print("Time for derivatives!")
 
 
 def challenge_integrals():
-    print("Time for addition!")
+    print("Time for integrals!")
 
 
 
@@ -185,7 +254,10 @@ def check_for_challenges(character, board):
     return location in CLASSES.keys()
 
 
-
+def execute_challenge_protocol(character, board):
+    print(character)
+    location = board[get_character_location(character)]
+    CLASSES[location](character)
 
 
 def main():
