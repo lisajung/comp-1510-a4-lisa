@@ -345,9 +345,68 @@ def challenge_division(character):
             challenge_addition(character)
 
 
-
-def challenge_derivatives():
+def challenge_derivatives(character):
     print("Time for derivatives!")
+    if character[LEVEL_KEY] == 1:
+        print("Find the derivative of y = 5x - 4.")
+        print("a: 5")
+        print("b: 6")
+        print("c: 7")
+        print("d: 8")
+        answer = input("Choose one of a, b, c, or d. Type your answer here:")
+        if answer.lower() == "a":
+            character[EXP_KEY] = character[EXP_KEY] + 50
+            print("Correct! Here's 50 EXP to help you prepare for your finals.")
+            print(character)
+            check_for_level_up_two(character)
+        elif answer.lower() == "d" or answer.lower() == "b" or answer.lower() == "c":
+            character[CURRENT_EGO_KEY] = character[CURRENT_EGO_KEY] - 50
+            print("Wrong! You lost 50 ego points. If you have no ego points left, you'll fail your final.")
+            print(character)
+            if character[CURRENT_EGO_KEY] == 0:
+                print("Answering all those questions incorrectly killed your ego.")
+                print(r"""
+
+                        ░██████╗░░█████╗░███╗░░░███╗███████╗  ░█████╗░██╗░░░██╗███████╗██████╗░
+                        ██╔════╝░██╔══██╗████╗░████║██╔════╝  ██╔══██╗██║░░░██║██╔════╝██╔══██╗
+                        ██║░░██╗░███████║██╔████╔██║█████╗░░  ██║░░██║╚██╗░██╔╝█████╗░░██████╔╝
+                        ██║░░╚██╗██╔══██║██║╚██╔╝██║██╔══╝░░  ██║░░██║░╚████╔╝░██╔══╝░░██╔══██╗
+                        ╚██████╔╝██║░░██║██║░╚═╝░██║███████╗  ╚█████╔╝░░╚██╔╝░░███████╗██║░░██║
+                        ░╚═════╝░╚═╝░░╚═╝╚═╝░░░░░╚═╝╚══════╝  ░╚════╝░░░░╚═╝░░░╚══════╝╚═╝░░╚═╝
+                """)
+        else:
+            print("That's not one of the answers genius. Try again!")
+            challenge_addition(character)
+    elif character[LEVEL_KEY] == 2:
+        print("What is the derivative of (x + 2)^2 - 5x^3")
+        print("a: 12x - 3")
+        print("b: -30x^2 + 4x - 6")
+        print("c: 10x^2 + 5")
+        print("d: -15x^2 + 2x + 4.")
+        answer = input("Choose one of a, b, c, or d. Type your answer here:")
+        if answer.lower() == "d":
+            character[EXP_KEY] = character[EXP_KEY] + 50
+            print("Correct! Here's 50 EXP to help you prepare for your finals.")
+            print(character)
+            check_for_level_up_three(character)
+        elif answer.lower() == "a" or answer.lower() == "b" or answer.lower() == "c":
+            character[CURRENT_EGO_KEY] = character[CURRENT_EGO_KEY] - 50
+            print("Wrong! You lost 50 ego points.")
+            print(character)
+            if character[CURRENT_EGO_KEY] == 0:
+                print("Answering all those questions incorrectly killed your ego.")
+                print(r"""
+
+                                ░██████╗░░█████╗░███╗░░░███╗███████╗  ░█████╗░██╗░░░██╗███████╗██████╗░
+                                ██╔════╝░██╔══██╗████╗░████║██╔════╝  ██╔══██╗██║░░░██║██╔════╝██╔══██╗
+                                ██║░░██╗░███████║██╔████╔██║█████╗░░  ██║░░██║╚██╗░██╔╝█████╗░░██████╔╝
+                                ██║░░╚██╗██╔══██║██║╚██╔╝██║██╔══╝░░  ██║░░██║░╚████╔╝░██╔══╝░░██╔══██╗
+                                ╚██████╔╝██║░░██║██║░╚═╝░██║███████╗  ╚█████╔╝░░╚██╔╝░░███████╗██║░░██║
+                                ░╚═════╝░╚═╝░░╚═╝╚═╝░░░░░╚═╝╚══════╝  ░╚════╝░░░░╚═╝░░░╚══════╝╚═╝░░╚═╝
+                        """)
+        else:
+            print("That's not one of the answers genius. Try again!")
+            challenge_addition(character)
 
 
 def challenge_integrals():
