@@ -22,7 +22,8 @@ def game():  # called from main
     character = make_character()
     achieved_goal = False
     execute_challenge_protocol(character, board)
-    while not achieved_goal and character[CURRENT_EGO_KEY] > 0:
+    check_game_over(character)
+    while not achieved_goal:
         describe_current_location(board, character)
         direction = get_user_choice()
         valid_move = validate_move(character, direction)
@@ -54,8 +55,23 @@ def make_character():
             LEVEL_KEY: 1, EXP_KEY: 0}
 
 
-def check_for_level_up_two(character):
-    if character[EXP_KEY] == 100:
+def check_for_level_up(character):
+    if character[EXP_KEY] == 250:
+        print(r"""\
+                    ╭╮╱╱╱╱╱╱╱╱╱╭╮
+                    ┃┃╱╱╱╱╱╱╱╱╱┃┃
+                    ┃┃╭━━┳╮╭┳━━┫┃╱╭╮╭┳━━╮
+                    ┃┃┃┃━┫╰╯┃┃━┫┃╱┃┃┃┃╭╮┃
+                    ┃╰┫┃━╋╮╭┫┃━┫╰╮┃╰╯┃╰╯┃
+                    ╰━┻━━╯╰╯╰━━┻━╯╰━━┫╭━╯
+                    ╱╱╱╱╱╱╱╱╱╱╱╱╱╱╱╱╱┃┃
+                    ╱╱╱╱╱╱╱╱╱╱╱╱╱╱╱╱╱╰╯
+        """)
+        print("Congrats! You are now level 3!")
+        character[LEVEL_KEY] += 1
+        character[CURRENT_EGO_KEY] = 100
+        print(character)
+    elif character[EXP_KEY] == 100:
         print(r"""
                     ╭╮╱╱╱╱╱╱╱╱╱╭╮
                     ┃┃╱╱╱╱╱╱╱╱╱┃┃
@@ -70,41 +86,17 @@ def check_for_level_up_two(character):
         character[LEVEL_KEY] += 1
         character[CURRENT_EGO_KEY] = 100
         print(character)
-    else:
-        return
-
-
-def check_for_level_up_three(character):
-    if character[EXP_KEY] == 250:
-        print(r"""\
-                    ╭╮╱╱╱╱╱╱╱╱╱╭╮
-                    ┃┃╱╱╱╱╱╱╱╱╱┃┃
-                    ┃┃╭━━┳╮╭┳━━┫┃╱╭╮╭┳━━╮
-                    ┃┃┃┃━┫╰╯┃┃━┫┃╱┃┃┃┃╭╮┃
-                    ┃╰┫┃━╋╮╭┫┃━┫╰╮┃╰╯┃╰╯┃
-                    ╰━┻━━╯╰╯╰━━┻━╯╰━━┫╭━╯
-                    ╱╱╱╱╱╱╱╱╱╱╱╱╱╱╱╱╱┃┃
-                    ╱╱╱╱╱╱╱╱╱╱╱╱╱╱╱╱╱╰╯
-        """)
-        print("Congrats! You are now level 3!")
-        character[LEVEL_KEY] += 3
-        character[CURRENT_EGO_KEY] = 100
-        print(character)
-    else:
-        return
 
 
 def gain_exp(character):
     character[EXP_KEY] = character[EXP_KEY] + 50
     print("Correct! Here's 50 EXP to help you prepare for your finals.")
     print(character)
-    check_for_level_up_two(character)
-    check_for_level_up_three(character)
-
+    check_for_level_up(character)
 
 
 def lose_ego(character):
-    character[CURRENT_EGO_KEY] = character[CURRENT_EGO_KEY] - 50
+    character[CURRENT_EGO_KEY] = character[CURRENT_EGO_KEY] - 100
     print("Wrong! You lost 50 ego points. If you have no ego points left, you'll fail your final.")
     print(character)
 
