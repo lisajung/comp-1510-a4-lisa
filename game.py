@@ -19,7 +19,7 @@ def game():  # called from main
     board = make_board(rows, columns)
     character = make_character()
     achieved_goal = False
-    challenge_addition(character)
+    # challenge_addition(character)
     while not achieved_goal and character[CURRENT_EGO_KEY] > 0:
         describe_current_location(board, character)
         direction = get_user_choice()
@@ -281,8 +281,69 @@ def challenge_multiplication(character):
             challenge_addition(character)
 
 
-def challenge_division():
+def challenge_division(character):
     print("Time for division!")
+    if character[LEVEL_KEY] == 1:
+        print("What is 54 / 9?")
+        print("a: 6")
+        print("b: 7")
+        print("c: 8")
+        print("d: 9")
+        answer = input("Choose one of a, b, c, or d. Type your answer here:")
+        if answer.lower() == "a":
+            character[EXP_KEY] = character[EXP_KEY] + 50
+            print("Correct! Here's 50 EXP to help you prepare for your finals.")
+            print(character)
+            check_for_level_up_two(character)
+        elif answer.lower() == "d" or answer.lower() == "b" or answer.lower() == "c":
+            character[CURRENT_EGO_KEY] = character[CURRENT_EGO_KEY] - 50
+            print("Wrong! You lost 50 ego points. If you have no ego points left, you'll fail your final.")
+            print(character)
+            if character[CURRENT_EGO_KEY] == 0:
+                print("Answering all those questions incorrectly killed your ego.")
+                print(r"""
+
+                        ░██████╗░░█████╗░███╗░░░███╗███████╗  ░█████╗░██╗░░░██╗███████╗██████╗░
+                        ██╔════╝░██╔══██╗████╗░████║██╔════╝  ██╔══██╗██║░░░██║██╔════╝██╔══██╗
+                        ██║░░██╗░███████║██╔████╔██║█████╗░░  ██║░░██║╚██╗░██╔╝█████╗░░██████╔╝
+                        ██║░░╚██╗██╔══██║██║╚██╔╝██║██╔══╝░░  ██║░░██║░╚████╔╝░██╔══╝░░██╔══██╗
+                        ╚██████╔╝██║░░██║██║░╚═╝░██║███████╗  ╚█████╔╝░░╚██╔╝░░███████╗██║░░██║
+                        ░╚═════╝░╚═╝░░╚═╝╚═╝░░░░░╚═╝╚══════╝  ░╚════╝░░░░╚═╝░░░╚══════╝╚═╝░░╚═╝
+                """)
+        else:
+            print("That's not one of the answers genius. Try again!")
+            challenge_addition(character)
+    elif character[LEVEL_KEY] == 2:
+        print("What is 686 / 98?")
+        print("a: 15")
+        print("b: 12")
+        print("c: 7")
+        print("d: 9")
+        answer = input("Choose one of a, b, c, or d. Type your answer here:")
+        if answer.lower() == "c":
+            character[EXP_KEY] = character[EXP_KEY] + 50
+            print("Correct! Here's 50 EXP to help you prepare for your finals.")
+            print(character)
+            check_for_level_up_three(character)
+        elif answer.lower() == "a" or answer.lower() == "b" or answer.lower() == "d":
+            character[CURRENT_EGO_KEY] = character[CURRENT_EGO_KEY] - 50
+            print("Wrong! You lost 50 ego points.")
+            print(character)
+            if character[CURRENT_EGO_KEY] == 0:
+                print("Answering all those questions incorrectly killed your ego.")
+                print(r"""
+
+                                ░██████╗░░█████╗░███╗░░░███╗███████╗  ░█████╗░██╗░░░██╗███████╗██████╗░
+                                ██╔════╝░██╔══██╗████╗░████║██╔════╝  ██╔══██╗██║░░░██║██╔════╝██╔══██╗
+                                ██║░░██╗░███████║██╔████╔██║█████╗░░  ██║░░██║╚██╗░██╔╝█████╗░░██████╔╝
+                                ██║░░╚██╗██╔══██║██║╚██╔╝██║██╔══╝░░  ██║░░██║░╚████╔╝░██╔══╝░░██╔══██╗
+                                ╚██████╔╝██║░░██║██║░╚═╝░██║███████╗  ╚█████╔╝░░╚██╔╝░░███████╗██║░░██║
+                                ░╚═════╝░╚═╝░░╚═╝╚═╝░░░░░╚═╝╚══════╝  ░╚════╝░░░░╚═╝░░░╚══════╝╚═╝░░╚═╝
+                        """)
+        else:
+            print("That's not one of the answers genius. Try again!")
+            challenge_addition(character)
+
 
 
 def challenge_derivatives():
