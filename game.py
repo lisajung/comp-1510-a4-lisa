@@ -151,12 +151,28 @@ def gain_exp(character):
 
 
 def lose_ego(character):
+    """
+    Subtract 50 ego points from character's current ego.
+
+    :param character: a dictionary representing the character
+    :precondition: character ego must not be 0
+    :postcondition: subtract 50 ego points from the character's dictionary
+    :return: update character dictionary by removing 50 ego
+    """
     character[CURRENT_EGO_KEY] = character[CURRENT_EGO_KEY] - 50
-    print("Wrong! You lost 50 ego points. If you have no ego points left, you'll fail your final.")
+    print("Wrong! You lost some of your ego... 50 ego points to be exact."
+          " \nIf you have no ego points left, you'll fail your final.")
     print(character)
 
 
 def check_game_over(character):
+    """
+    Check if character's ego points is 0.
+
+    :param character: a dictionary representing the character
+    :postcondition: check to see if character's ego is 0
+    :return: end game if character's ego is 0
+    """
     if character[CURRENT_EGO_KEY] == 0:
         print("Answering all those questions incorrectly killed your ego.")
         print_game_over()
@@ -164,6 +180,11 @@ def check_game_over(character):
 
 
 def print_game_over():
+    """
+    Print "Game Over" ASCII art.
+
+    :return: print "Game Over" ASCII art
+    """
     print(r"""
 
                                     ░██████╗░░█████╗░███╗░░░███╗███████╗  ░█████╗░██╗░░░██╗███████╗██████╗░
