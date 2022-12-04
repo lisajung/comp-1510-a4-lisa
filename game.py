@@ -4,6 +4,7 @@ A01332998
 """
 import random
 import sys
+import time
 
 NAME_KEY = "Name"
 X_COORD_KEY = "X-coordinate"
@@ -21,8 +22,6 @@ def game():  # called from main
     board = make_board(rows, columns)
     character = make_character()
     achieved_goal = False
-    execute_challenge_protocol(character, board)
-    check_game_over(character)
     while not achieved_goal:
         describe_current_location(board, character)
         direction = get_user_choice()
@@ -35,16 +34,23 @@ def game():  # called from main
                 print("Found a challenge")
                 execute_challenge_protocol(character, board)
                 check_game_over(character)
-
+                if character[LEVEL_KEY] == 3:
+                    final_boss()
+                    achieved_goal = True
             else:
                 print("No challenge here")
-        #             if character_has_leveled():
-        #                 execute_glow_up_protocol()
-        #         achieved_goal = check_if_goal_attained(board, character)
         else:
             print("That's a wall smarty pants. Choose another direction.")
-    #         // Tell the user they can’t go in that direction
-    #         // Print end of game stuff like congratulations or sorry you died
+    print(r"""
+    
+        ░█████╗░░█████╗░███╗░░██╗░██████╗░██████╗░░█████╗░████████╗██╗░░░██╗██╗░░░░░░█████╗░████████╗██╗░█████╗░███╗░░██╗░██████╗██╗██╗
+        ██╔══██╗██╔══██╗████╗░██║██╔════╝░██╔══██╗██╔══██╗╚══██╔══╝██║░░░██║██║░░░░░██╔══██╗╚══██╔══╝██║██╔══██╗████╗░██║██╔════╝██║██║
+        ██║░░╚═╝██║░░██║██╔██╗██║██║░░██╗░██████╔╝███████║░░░██║░░░██║░░░██║██║░░░░░███████║░░░██║░░░██║██║░░██║██╔██╗██║╚█████╗░██║██║
+        ██║░░██╗██║░░██║██║╚████║██║░░╚██╗██╔══██╗██╔══██║░░░██║░░░██║░░░██║██║░░░░░██╔══██║░░░██║░░░██║██║░░██║██║╚████║░╚═══██╗╚═╝╚═╝
+        ╚█████╔╝╚█████╔╝██║░╚███║╚██████╔╝██║░░██║██║░░██║░░░██║░░░╚██████╔╝███████╗██║░░██║░░░██║░░░██║╚█████╔╝██║░╚███║██████╔╝██╗██╗
+        ░╚════╝░░╚════╝░╚═╝░░╚══╝░╚═════╝░╚═╝░░╚═╝╚═╝░░╚═╝░░░╚═╝░░░░╚═════╝░╚══════╝╚═╝░░╚═╝░░░╚═╝░░░╚═╝░╚════╝░╚═╝░░╚══╝╚═════╝░╚═╝╚═╝
+            """)
+    print("You have passed your final. Okay now... go and get some sleep. See you next term~")
 
 
 def make_character():
@@ -52,7 +58,7 @@ def make_character():
                            "We've placed study sessions in classrooms \nthroughout the school for you to "
                            "prepare for finals! \n\nPlease write your name on this nametag *give you nametag* : ")
     return {NAME_KEY: character_name, X_COORD_KEY: 0, Y_COORD_KEY: 0, CURRENT_EGO_KEY: 100, MAX_EGO_KEY: 100,
-            LEVEL_KEY: 1, EXP_KEY: 0}
+            LEVEL_KEY: 3, EXP_KEY: 0}
 
 
 def check_for_level_up(character):
@@ -246,6 +252,55 @@ def challenge_integrals(character):
         answer = get_valid_mc_answer()
         return answer == "c"
 
+def fail_final():
+    print("You answered one of the questions wrong... you failed CST.")
+    print_game_over()
+    sys.exit()
+
+def final_boss():
+
+    print("Congratulations on getting to level 3! I think you're ready to tackle your final now."
+          "For your final, you will meet with your instructor, Chris Thompson."
+          " You will have to answer three of his questions in a row correctly to pass..." 
+          "If you get even one wrong, YOU FAIL.")
+    time.sleep(1)
+    print("You hear a light thumping sound walking down the hall and towards the room you're in."
+          "You feel your heart clench and your stomach drop. If you fail this final, you fail CST.")
+    time.sleep(2)
+    print("*Chris enters the room*")
+    time.sleep(1)
+    print("His eyes dart towards you and the corner of his lips begins to turns upwards into a sinister smile."
+          "In a booming voice, he asks you the first question...")
+    print("What is 360 x 6 + 24?")
+    print("a: 2,184")
+    print("b: 2,178")
+    print("c: 2,160")
+    print("d: 2,192")
+    answer = get_valid_mc_answer()
+    if answer != "a":
+        fail_final()
+    print("What is 548 + 64 / 8 x 12")
+    print("a: 620")
+    print("b: 621")
+    print("c: 644")
+    print("d: 675")
+    answer = get_valid_mc_answer()
+    if answer != "c":
+        fail_final()
+    print("What are the first 10 numbers in the Fibonacci sequence?")
+    print("a: 0, 1, 1, 2, 3, 5, 8, 17, 23, 34")
+    print("b: 0, 1, 1, 2, 3, 5, 8, 13, 22, 34")
+    print("c: 0, 1, 1, 2, 3, 5, 8, 13, 21, 34")
+    print("d: 0, 1, 2, 3, 5, 7, 15, 23, 31, 45")
+    answer = get_valid_mc_answer()
+    if answer != "c":
+        fail_final()
+
+
+
+
+
+
 
 """This dictionary represents the classroom description as the key and the challenge function that corresponds with 
 the class. """
@@ -361,9 +416,8 @@ def check_for_challenges(character, board):
 
 
 def execute_challenge_protocol(character, board):
-    print(character)
     location = board[get_character_location(character)]
-    did_pass_challenge = CLASSES["Addition"](character)
+    did_pass_challenge = CLASSES[location](character)
     if did_pass_challenge:
         gain_exp(character)
     else:
