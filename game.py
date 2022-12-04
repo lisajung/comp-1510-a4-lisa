@@ -16,7 +16,7 @@ EXP_KEY = "Experience"
 POSSIBLE_MULTIPLE_CHOICE_ANSWERS = ["a", "b", "c", "d"]
 
 
-def game():  # called from main
+def game():
     rows = 5
     columns = 5
     board = make_board(rows, columns)
@@ -29,7 +29,6 @@ def game():  # called from main
         valid_move = validate_move(character, direction)
         if valid_move:
             move_character(character, direction)
-            # describe_current_location(board, character)
             there_is_a_challenge = check_for_challenges(character, board)
             if there_is_a_challenge:
                 print("Found a challenge")
@@ -51,10 +50,33 @@ def game():  # called from main
         ╚█████╔╝╚█████╔╝██║░╚███║╚██████╔╝██║░░██║██║░░██║░░░██║░░░╚██████╔╝███████╗██║░░██║░░░██║░░░██║╚█████╔╝██║░╚███║██████╔╝██╗██╗
         ░╚════╝░░╚════╝░╚═╝░░╚══╝░╚═════╝░╚═╝░░╚═╝╚═╝░░╚═╝░░░╚═╝░░░░╚═════╝░╚══════╝╚═╝░░╚═╝░░░╚═╝░░░╚═╝░╚════╝░╚═╝░░╚══╝╚═════╝░╚═╝╚═╝
             """)
-    print("You have passed your final. Okay now... go and get some sleep. See you next term~")
+    print("You passed your final. Okay now... go and get some rest you sleep deprived zombie. See you next term~")
 
+
+def make_character():
+    """
+    Create a dictionary that represents the character of the game.
+
+    :return: a dictionary with characteristics of a game character
+    """
+    character_name = input("Oh hey....buddy...welcome to finals season! "
+                           "\nWe've placed study sessions in classrooms throughout the school for you to "
+                           "prepare for finals! \nWalk around the school to find these classrooms to help you ace your"
+                           " exams. \n\nPlease write your name on this nametag *give you nametag* : ")
+    return {NAME_KEY: character_name, X_COORD_KEY: 0, Y_COORD_KEY: 0, CURRENT_EGO_KEY: 100, MAX_EGO_KEY: 100,
+            LEVEL_KEY: 1, EXP_KEY: 0}
 
 def print_board(board, character):
+    """
+    Print game board that displays the character and classroom locations.
+
+    :param board: a dictionary representing the game board
+    :param character: a dictionary representing the character
+    :precondition: character must be a dictionary
+    :precondition: board must be a dictionary
+    :postcondition: print game board
+    :return: game board with character and classroom location indicated printed
+    """
     board_print_list = []
     for key, value in board.items():
         character_location = get_character_location(character)
@@ -71,20 +93,16 @@ def print_board(board, character):
     print("".join(board_print_list[20:25]))
 
 
-def make_character():
-    """
-    Create character.
-
-    :return:
-    """
-    character_name = input("Oh hey....buddy...welcome to finals season! "
-                           "We've placed study sessions in classrooms \nthroughout the school for you to "
-                           "prepare for finals! \n\nPlease write your name on this nametag *give you nametag* : ")
-    return {NAME_KEY: character_name, X_COORD_KEY: 0, Y_COORD_KEY: 0, CURRENT_EGO_KEY: 100, MAX_EGO_KEY: 100,
-            LEVEL_KEY: 1, EXP_KEY: 0}
-
-
 def check_for_level_up(character):
+    """
+    Check if character has enough EXP to level up.
+
+    :param character: a dictionary representing the character
+    :precondition: character must be a dictionary
+    :precondition: character level must be less than 3
+    :postcondition: increase the character's level if they have enough EXP
+    :return: level up character if character has reached the EXP required to level up
+    """
     if character[EXP_KEY] == 250:
         print(r"""\
                     ╭╮╱╱╱╱╱╱╱╱╱╭╮
@@ -118,6 +136,14 @@ def check_for_level_up(character):
 
 
 def gain_exp(character):
+    """
+    Increase character's EXP by 50 points.
+
+    :param character: a dictionary representing the character
+    :precondition: character cannot exceed 250 EXP
+    :postcondition: add 50 EXP points to character's dictionary
+    :return: update character dictionary by increasing EXP by 50
+    """
     character[EXP_KEY] = character[EXP_KEY] + 50
     print("Correct! Here's 50 EXP to help you prepare for your finals.")
     print(character)
@@ -319,7 +345,6 @@ def final_boss():
     if answer != "c":
         fail_final()
 
-
 """This dictionary represents the classroom description as the key and the challenge function that corresponds with 
 the class. """
 CLASSES = {"Addition": challenge_addition, "Subtraction": challenge_subtraction,
@@ -353,6 +378,7 @@ def make_board(rows, columns):
     for index in range(len(classroom_locations)):
         board[classroom_locations[index]] = class_descriptions[index]
     return board
+
 
 
 def get_character_location(character):
