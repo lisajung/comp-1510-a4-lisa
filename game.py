@@ -197,6 +197,11 @@ def print_game_over():
 
 
 def get_valid_mc_answer():
+    """
+    Check if user input is a valid input for the multiple choice questions.
+
+    :return: user input as a string if it is a valid input
+    """
     answer = ""
     while answer not in POSSIBLE_MULTIPLE_CHOICE_ANSWERS:
         answer = input("Choose one of a, b, c, or d. Type your answer here:")
@@ -204,6 +209,14 @@ def get_valid_mc_answer():
 
 
 def challenge_addition(character):
+    """
+    Ask user addition questions.
+
+    :param character: a dictionary representing a character
+    :precondition: character has not reached level 3 yet
+    :postcondition: ask user addition questions relative to their character level
+    :return: a boolean representing if the character answered the question correctly or not
+    """
     print("Time for addition!")
     if character[LEVEL_KEY] == 1:
         print("What is 5 + 5?")
@@ -224,6 +237,14 @@ def challenge_addition(character):
 
 
 def challenge_subtraction(character):
+    """
+        Ask user subtraction questions.
+
+        :param character: a dictionary representing a character
+        :precondition: character has not reached level 3 yet
+        :postcondition: ask user subtraction questions relative to their character level
+        :return: a boolean representing if the character answered the question correctly or not
+        """
     print("Time for subtraction!")
     if character[LEVEL_KEY] == 1:
         print("What is 12 - 5?")
@@ -244,6 +265,14 @@ def challenge_subtraction(character):
 
 
 def challenge_multiplication(character):
+    """
+        Ask user multiplication questions.
+
+        :param character: a dictionary representing a character
+        :precondition: character has not reached level 3 yet
+        :postcondition: ask user multiplication questions relative to their character level
+        :return: a boolean representing if the character answered the question correctly or not
+        """
     print("Time for multiplication!")
     if character[LEVEL_KEY] == 1:
         print("What is 12 x 11?")
@@ -264,6 +293,14 @@ def challenge_multiplication(character):
 
 
 def challenge_division(character):
+    """
+        Ask user division questions.
+
+        :param character: a dictionary representing a character
+        :precondition: character has not reached level 3 yet
+        :postcondition: ask user division  questions relative to their character level
+        :return: a boolean representing if the character answered the question correctly or not
+        """
     print("Time for division!")
     if character[LEVEL_KEY] == 1:
         print("What is 54 / 9?")
@@ -284,6 +321,14 @@ def challenge_division(character):
 
 
 def challenge_derivatives(character):
+    """
+        Ask user derivative questions.
+
+        :param character: a dictionary representing a character
+        :precondition: character has not reached level 3 yet
+        :postcondition: ask user derivative questions relative to their character level
+        :return: a boolean representing if the character answered the question correctly or not
+        """
     print("Time for derivatives!")
     if character[LEVEL_KEY] == 1:
         print("What is the derivative of y = 5x - 4?")
@@ -304,6 +349,14 @@ def challenge_derivatives(character):
 
 
 def challenge_integrals(character):
+    """
+        Ask user integral questions.
+
+        :param character: a dictionary representing a character
+        :precondition: character has not reached level 3 yet
+        :postcondition: ask user integral questions relative to their character level
+        :return: a boolean representing if the character answered the question correctly or not
+        """
     print("Time for integrals!")
     if character[LEVEL_KEY] == 1:
         print("What is the integral of sinx?")
