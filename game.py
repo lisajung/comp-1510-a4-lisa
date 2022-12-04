@@ -381,7 +381,7 @@ def fail_final():
     """
     This function ends the game if the character fails their final.
 
-    :return: exits game loop
+    :postcondition: exits game loop
     """
     print("You answered one of the questions wrong... you failed CST.")
     print_game_over()
@@ -392,7 +392,7 @@ def final_boss():
     """
     Ask character math questions for the final challenge of the game.
 
-    :return: a boolean representing whether the character failed the final or not
+    :postcondition: a boolean representing whether the character failed the final or not
     """
     print("Congratulations on getting to level 3! I think you're ready to tackle your final now."
           "For your final, you will meet with your instructor, Chris Thompson."
@@ -526,20 +526,39 @@ def get_user_choice():
         return get_user_choice()
 
 
-def validate_move(character, direction_chosen):
+def validate_move(character, direction):
+    """
+    Determine if the direction a user wants to move in is valid.
+
+    :param character: a dictionary representing a character
+    :param direction: an integer representing the direction user wants to travel in
+    :precondition: character is a dictionary
+    :precondition: direction is either 1, 2, 3, or 4
+    :postcondition: determine if move user wants to make is valid
+    :return: boolean indicating whether user's move is valid or not
+    """
     location = get_character_location(character)
-    if direction_chosen == 1:
+    if direction == 1:
         return location[1] != 0
-    if direction_chosen == 2:
+    if direction == 2:
         return location[0] != 4
-    if direction_chosen == 3:
+    if direction == 3:
         return location[1] != 4
-    if direction_chosen == 4:
+    if direction == 4:
         return location[0] != 0
     return False
 
 
 def move_character(character, direction):
+    """
+    Move character to a different coordinate on the board.
+
+    :param character: a dictionary representing a character
+    :param direction: an integer representing the direction user wants to travel in
+    :precondition: character is a dictionary
+    :precondition: direction is either 1, 2, 3, or 4
+    :postcondition: change character's x or y coordinate in their dictionary
+    """
     if direction == 1:
         character[Y_COORD_KEY] = character[Y_COORD_KEY] - 1
     elif direction == 2:
@@ -551,11 +570,26 @@ def move_character(character, direction):
 
 
 def check_for_challenges(character, board):
+    """
+    Check if coordinates character is at has a challenge or not.
+
+    :param character: a dictionary representing a character
+    :param board: a dictionary representing the game board
+    :postcondition: determine if character's location has a challenge
+    :return: True if character is in a room with a challenge, False if not
+    """
     location = board[get_character_location(character)]
     return location in CLASSES.keys()
 
 
 def execute_challenge_protocol(character, board):
+    """
+    Execute whether a character should gain EXP or lose ego
+
+    :param character: a dictionary representing a character
+    :param board: a dictionary representing the game board
+    :precondition: character must exist
+    """
     location = board[get_character_location(character)]
     did_pass_challenge = CLASSES[location](character)
     if did_pass_challenge:
