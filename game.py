@@ -473,7 +473,10 @@ def make_board(rows, columns):
 def get_character_location(character):
     """
     Retreive the character's location on the board.
+
     :param character: a dictionary representing the character
+    :precondition: character must exist
+    :postcondition: get character's location on the board
     :return: a tuple representing the character's location
     """
     character_location = (character[X_COORD_KEY], character[Y_COORD_KEY])
@@ -483,8 +486,12 @@ def get_character_location(character):
 def describe_current_location(board, character):
     """
     This function describes where the character is on the board.
+
     :param board: a dictionary representing the game board
     :param character: a dictionary representing the character
+    :precondition: character must exist
+    :postcondition: describe the room and coordinates of the room the character is in.
+    :return: print name of room and coordinates of room character is in
     """
     location = board[get_character_location(character)]
     print("You are currently at " + location + ".")
@@ -495,6 +502,7 @@ def describe_current_location(board, character):
 def which_direction():
     """
     Generates an enumerated list representing the direction a user can move
+
     :return: an enumerated list of all possible directions a user can travel
     """
     possible_directions = ["North", "East", "South", "West"]
@@ -505,8 +513,8 @@ def which_direction():
 def get_user_choice():
     """
     Ask user which direction they want to move on the board.
-    :param character_location: a tuple representing the character's location
-    :return: a tuple representing the coordinates the user wishes to travel to
+
+    :return: an integer representing the user's input
     """
     print("Lets go to a different room. Which direction should we go?")
     which_direction()
