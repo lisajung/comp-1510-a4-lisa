@@ -96,7 +96,7 @@ def gain_exp(character):
 
 
 def lose_ego(character):
-    character[CURRENT_EGO_KEY] = character[CURRENT_EGO_KEY] - 100
+    character[CURRENT_EGO_KEY] = character[CURRENT_EGO_KEY] - 50
     print("Wrong! You lost 50 ego points. If you have no ego points left, you'll fail your final.")
     print(character)
 
@@ -155,60 +155,16 @@ def challenge_subtraction(character):
         print("b: 7")
         print("c: 9")
         print("d: 10")
-        answer = input("Choose one of a, b, c, or d. Type your answer here:")
-        if answer.lower() == "b":
-            character[EXP_KEY] = character[EXP_KEY] + 50
-            print("Correct! Here's 50 EXP to help you prepare for your finals.")
-            print(character)
-            check_for_level_up_two(character)
-        elif answer.lower() == "a" or answer.lower() == "c" or answer.lower() == "d":
-            character[CURRENT_EGO_KEY] = character[CURRENT_EGO_KEY] - 50
-            print("Wrong! You lost 50 ego points. If you have no ego points left, you'll fail your final.")
-            print(character)
-            if character[CURRENT_EGO_KEY] == 0:
-                print("Answering all those questions incorrectly killed your ego.")
-                print(r"""
-
-                        ░██████╗░░█████╗░███╗░░░███╗███████╗  ░█████╗░██╗░░░██╗███████╗██████╗░
-                        ██╔════╝░██╔══██╗████╗░████║██╔════╝  ██╔══██╗██║░░░██║██╔════╝██╔══██╗
-                        ██║░░██╗░███████║██╔████╔██║█████╗░░  ██║░░██║╚██╗░██╔╝█████╗░░██████╔╝
-                        ██║░░╚██╗██╔══██║██║╚██╔╝██║██╔══╝░░  ██║░░██║░╚████╔╝░██╔══╝░░██╔══██╗
-                        ╚██████╔╝██║░░██║██║░╚═╝░██║███████╗  ╚█████╔╝░░╚██╔╝░░███████╗██║░░██║
-                        ░╚═════╝░╚═╝░░╚═╝╚═╝░░░░░╚═╝╚══════╝  ░╚════╝░░░░╚═╝░░░╚══════╝╚═╝░░╚═╝
-                """)
-        else:
-            print("That's not one of the answers genius. Try again!")
-            challenge_addition(character)
+        answer = get_valid_mc_answer()
+        return answer == "b"
     elif character[LEVEL_KEY] == 2:
         print("What is 67 - 28?")
         print("a: 51")
         print("b: 36")
         print("c: 39")
         print("d: 42")
-        answer = input("Choose one of a, b, c, or d. Type your answer here:")
-        if answer.lower() == "c":
-            character[EXP_KEY] = character[EXP_KEY] + 50
-            print("Correct! Here's 50 EXP to help you prepare for your finals.")
-            print(character)
-            check_for_level_up_three(character)
-        elif answer.lower() == "a" or answer.lower() == "b" or answer.lower() == "d":
-            character[CURRENT_EGO_KEY] = character[CURRENT_EGO_KEY] - 50
-            print("Wrong! You lost 50 ego points.")
-            print(character)
-            if character[CURRENT_EGO_KEY] == 0:
-                print("Answering all those questions incorrectly killed your ego.")
-                print(r"""
-
-                                ░██████╗░░█████╗░███╗░░░███╗███████╗  ░█████╗░██╗░░░██╗███████╗██████╗░
-                                ██╔════╝░██╔══██╗████╗░████║██╔════╝  ██╔══██╗██║░░░██║██╔════╝██╔══██╗
-                                ██║░░██╗░███████║██╔████╔██║█████╗░░  ██║░░██║╚██╗░██╔╝█████╗░░██████╔╝
-                                ██║░░╚██╗██╔══██║██║╚██╔╝██║██╔══╝░░  ██║░░██║░╚████╔╝░██╔══╝░░██╔══██╗
-                                ╚██████╔╝██║░░██║██║░╚═╝░██║███████╗  ╚█████╔╝░░╚██╔╝░░███████╗██║░░██║
-                                ░╚═════╝░╚═╝░░╚═╝╚═╝░░░░░╚═╝╚══════╝  ░╚════╝░░░░╚═╝░░░╚══════╝╚═╝░░╚═╝
-                        """)
-        else:
-            print("That's not one of the answers genius. Try again!")
-            challenge_addition(character)
+        answer = get_valid_mc_answer()
+        return answer == "c"
 
 
 def challenge_multiplication(character):
@@ -219,60 +175,16 @@ def challenge_multiplication(character):
         print("b: 126")
         print("c: 151")
         print("d: 143")
-        answer = input("Choose one of a, b, c, or d. Type your answer here:")
-        if answer.lower() == "a":
-            character[EXP_KEY] = character[EXP_KEY] + 50
-            print("Correct! Here's 50 EXP to help you prepare for your finals.")
-            print(character)
-            check_for_level_up_two(character)
-        elif answer.lower() == "d" or answer.lower() == "b" or answer.lower() == "c":
-            character[CURRENT_EGO_KEY] = character[CURRENT_EGO_KEY] - 50
-            print("Wrong! You lost 50 ego points. If you have no ego points left, you'll fail your final.")
-            print(character)
-            if character[CURRENT_EGO_KEY] == 0:
-                print("Answering all those questions incorrectly killed your ego.")
-                print(r"""
-
-                        ░██████╗░░█████╗░███╗░░░███╗███████╗  ░█████╗░██╗░░░██╗███████╗██████╗░
-                        ██╔════╝░██╔══██╗████╗░████║██╔════╝  ██╔══██╗██║░░░██║██╔════╝██╔══██╗
-                        ██║░░██╗░███████║██╔████╔██║█████╗░░  ██║░░██║╚██╗░██╔╝█████╗░░██████╔╝
-                        ██║░░╚██╗██╔══██║██║╚██╔╝██║██╔══╝░░  ██║░░██║░╚████╔╝░██╔══╝░░██╔══██╗
-                        ╚██████╔╝██║░░██║██║░╚═╝░██║███████╗  ╚█████╔╝░░╚██╔╝░░███████╗██║░░██║
-                        ░╚═════╝░╚═╝░░╚═╝╚═╝░░░░░╚═╝╚══════╝  ░╚════╝░░░░╚═╝░░░╚══════╝╚═╝░░╚═╝
-                """)
-        else:
-            print("That's not one of the answers genius. Try again!")
-            challenge_addition(character)
+        answer = get_valid_mc_answer()
+        return answer == "a"
     elif character[LEVEL_KEY] == 2:
         print("What is 123 x 321?")
         print("a: 20,342")
         print("b: 17,196")
         print("c: 37,488")
         print("d: 39,483")
-        answer = input("Choose one of a, b, c, or d. Type your answer here:")
-        if answer.lower() == "d":
-            character[EXP_KEY] = character[EXP_KEY] + 50
-            print("Correct! Here's 50 EXP to help you prepare for your finals.")
-            print(character)
-            check_for_level_up_three(character)
-        elif answer.lower() == "a" or answer.lower() == "b" or answer.lower() == "c":
-            character[CURRENT_EGO_KEY] = character[CURRENT_EGO_KEY] - 50
-            print("Wrong! You lost 50 ego points.")
-            print(character)
-            if character[CURRENT_EGO_KEY] == 0:
-                print("Answering all those questions incorrectly killed your ego.")
-                print(r"""
-
-                                ░██████╗░░█████╗░███╗░░░███╗███████╗  ░█████╗░██╗░░░██╗███████╗██████╗░
-                                ██╔════╝░██╔══██╗████╗░████║██╔════╝  ██╔══██╗██║░░░██║██╔════╝██╔══██╗
-                                ██║░░██╗░███████║██╔████╔██║█████╗░░  ██║░░██║╚██╗░██╔╝█████╗░░██████╔╝
-                                ██║░░╚██╗██╔══██║██║╚██╔╝██║██╔══╝░░  ██║░░██║░╚████╔╝░██╔══╝░░██╔══██╗
-                                ╚██████╔╝██║░░██║██║░╚═╝░██║███████╗  ╚█████╔╝░░╚██╔╝░░███████╗██║░░██║
-                                ░╚═════╝░╚═╝░░╚═╝╚═╝░░░░░╚═╝╚══════╝  ░╚════╝░░░░╚═╝░░░╚══════╝╚═╝░░╚═╝
-                        """)
-        else:
-            print("That's not one of the answers genius. Try again!")
-            challenge_addition(character)
+        answer = get_valid_mc_answer()
+        return answer == "d"
 
 
 def challenge_division(character):
@@ -283,60 +195,16 @@ def challenge_division(character):
         print("b: 7")
         print("c: 8")
         print("d: 9")
-        answer = input("Choose one of a, b, c, or d. Type your answer here:")
-        if answer.lower() == "a":
-            character[EXP_KEY] = character[EXP_KEY] + 50
-            print("Correct! Here's 50 EXP to help you prepare for your finals.")
-            print(character)
-            check_for_level_up_two(character)
-        elif answer.lower() == "d" or answer.lower() == "b" or answer.lower() == "c":
-            character[CURRENT_EGO_KEY] = character[CURRENT_EGO_KEY] - 50
-            print("Wrong! You lost 50 ego points. If you have no ego points left, you'll fail your final.")
-            print(character)
-            if character[CURRENT_EGO_KEY] == 0:
-                print("Answering all those questions incorrectly killed your ego.")
-                print(r"""
-
-                        ░██████╗░░█████╗░███╗░░░███╗███████╗  ░█████╗░██╗░░░██╗███████╗██████╗░
-                        ██╔════╝░██╔══██╗████╗░████║██╔════╝  ██╔══██╗██║░░░██║██╔════╝██╔══██╗
-                        ██║░░██╗░███████║██╔████╔██║█████╗░░  ██║░░██║╚██╗░██╔╝█████╗░░██████╔╝
-                        ██║░░╚██╗██╔══██║██║╚██╔╝██║██╔══╝░░  ██║░░██║░╚████╔╝░██╔══╝░░██╔══██╗
-                        ╚██████╔╝██║░░██║██║░╚═╝░██║███████╗  ╚█████╔╝░░╚██╔╝░░███████╗██║░░██║
-                        ░╚═════╝░╚═╝░░╚═╝╚═╝░░░░░╚═╝╚══════╝  ░╚════╝░░░░╚═╝░░░╚══════╝╚═╝░░╚═╝
-                """)
-        else:
-            print("That's not one of the answers genius. Try again!")
-            challenge_addition(character)
+        answer = get_valid_mc_answer()
+        return answer == "a"
     elif character[LEVEL_KEY] == 2:
         print("What is 686 / 98?")
         print("a: 15")
         print("b: 12")
         print("c: 7")
         print("d: 9")
-        answer = input("Choose one of a, b, c, or d. Type your answer here:")
-        if answer.lower() == "c":
-            character[EXP_KEY] = character[EXP_KEY] + 50
-            print("Correct! Here's 50 EXP to help you prepare for your finals.")
-            print(character)
-            check_for_level_up_three(character)
-        elif answer.lower() == "a" or answer.lower() == "b" or answer.lower() == "d":
-            character[CURRENT_EGO_KEY] = character[CURRENT_EGO_KEY] - 50
-            print("Wrong! You lost 50 ego points.")
-            print(character)
-            if character[CURRENT_EGO_KEY] == 0:
-                print("Answering all those questions incorrectly killed your ego.")
-                print(r"""
-
-                                ░██████╗░░█████╗░███╗░░░███╗███████╗  ░█████╗░██╗░░░██╗███████╗██████╗░
-                                ██╔════╝░██╔══██╗████╗░████║██╔════╝  ██╔══██╗██║░░░██║██╔════╝██╔══██╗
-                                ██║░░██╗░███████║██╔████╔██║█████╗░░  ██║░░██║╚██╗░██╔╝█████╗░░██████╔╝
-                                ██║░░╚██╗██╔══██║██║╚██╔╝██║██╔══╝░░  ██║░░██║░╚████╔╝░██╔══╝░░██╔══██╗
-                                ╚██████╔╝██║░░██║██║░╚═╝░██║███████╗  ╚█████╔╝░░╚██╔╝░░███████╗██║░░██║
-                                ░╚═════╝░╚═╝░░╚═╝╚═╝░░░░░╚═╝╚══════╝  ░╚════╝░░░░╚═╝░░░╚══════╝╚═╝░░╚═╝
-                        """)
-        else:
-            print("That's not one of the answers genius. Try again!")
-            challenge_addition(character)
+        answer = get_valid_mc_answer()
+        return answer == "c"
 
 
 def challenge_derivatives(character):
@@ -347,60 +215,16 @@ def challenge_derivatives(character):
         print("b: 6")
         print("c: 7")
         print("d: 8")
-        answer = input("Choose one of a, b, c, or d. Type your answer here:")
-        if answer.lower() == "a":
-            character[EXP_KEY] = character[EXP_KEY] + 50
-            print("Correct! Here's 50 EXP to help you prepare for your finals.")
-            print(character)
-            check_for_level_up_two(character)
-        elif answer.lower() == "d" or answer.lower() == "b" or answer.lower() == "c":
-            character[CURRENT_EGO_KEY] = character[CURRENT_EGO_KEY] - 50
-            print("Wrong! You lost 50 ego points. If you have no ego points left, you'll fail your final.")
-            print(character)
-            if character[CURRENT_EGO_KEY] == 0:
-                print("Answering all those questions incorrectly killed your ego.")
-                print(r"""
-
-                        ░██████╗░░█████╗░███╗░░░███╗███████╗  ░█████╗░██╗░░░██╗███████╗██████╗░
-                        ██╔════╝░██╔══██╗████╗░████║██╔════╝  ██╔══██╗██║░░░██║██╔════╝██╔══██╗
-                        ██║░░██╗░███████║██╔████╔██║█████╗░░  ██║░░██║╚██╗░██╔╝█████╗░░██████╔╝
-                        ██║░░╚██╗██╔══██║██║╚██╔╝██║██╔══╝░░  ██║░░██║░╚████╔╝░██╔══╝░░██╔══██╗
-                        ╚██████╔╝██║░░██║██║░╚═╝░██║███████╗  ╚█████╔╝░░╚██╔╝░░███████╗██║░░██║
-                        ░╚═════╝░╚═╝░░╚═╝╚═╝░░░░░╚═╝╚══════╝  ░╚════╝░░░░╚═╝░░░╚══════╝╚═╝░░╚═╝
-                """)
-        else:
-            print("That's not one of the answers genius. Try again!")
-            challenge_addition(character)
+        answer = get_valid_mc_answer()
+        return answer == "a"
     elif character[LEVEL_KEY] == 2:
         print("What is the derivative of (x + 2)^2 - 5x^3?")
         print("a: 12x - 3")
         print("b: -30x^2 + 4x - 6")
         print("c: 10x^2 + 5")
         print("d: -15x^2 + 2x + 4.")
-        answer = input("Choose one of a, b, c, or d. Type your answer here:")
-        if answer.lower() == "d":
-            character[EXP_KEY] = character[EXP_KEY] + 50
-            print("Correct! Here's 50 EXP to help you prepare for your finals.")
-            print(character)
-            check_for_level_up_three(character)
-        elif answer.lower() == "a" or answer.lower() == "b" or answer.lower() == "c":
-            character[CURRENT_EGO_KEY] = character[CURRENT_EGO_KEY] - 50
-            print("Wrong! You lost 50 ego points.")
-            print(character)
-            if character[CURRENT_EGO_KEY] == 0:
-                print("Answering all those questions incorrectly killed your ego.")
-                print(r"""
-
-                                ░██████╗░░█████╗░███╗░░░███╗███████╗  ░█████╗░██╗░░░██╗███████╗██████╗░
-                                ██╔════╝░██╔══██╗████╗░████║██╔════╝  ██╔══██╗██║░░░██║██╔════╝██╔══██╗
-                                ██║░░██╗░███████║██╔████╔██║█████╗░░  ██║░░██║╚██╗░██╔╝█████╗░░██████╔╝
-                                ██║░░╚██╗██╔══██║██║╚██╔╝██║██╔══╝░░  ██║░░██║░╚████╔╝░██╔══╝░░██╔══██╗
-                                ╚██████╔╝██║░░██║██║░╚═╝░██║███████╗  ╚█████╔╝░░╚██╔╝░░███████╗██║░░██║
-                                ░╚═════╝░╚═╝░░╚═╝╚═╝░░░░░╚═╝╚══════╝  ░╚════╝░░░░╚═╝░░░╚══════╝╚═╝░░╚═╝
-                        """)
-        else:
-            print("That's not one of the answers genius. Try again!")
-            challenge_addition(character)
+        answer = get_valid_mc_answer()
+        return answer == "d"
 
 
 def challenge_integrals(character):
@@ -411,60 +235,16 @@ def challenge_integrals(character):
         print("b: −sinx + C")
         print("c: cosx + C")
         print("d: −cosx + C")
-        answer = input("Choose one of a, b, c, or d. Type your answer here:")
-        if answer.lower() == "d":
-            character[EXP_KEY] = character[EXP_KEY] + 50
-            print("Correct! Here's 50 EXP to help you prepare for your finals.")
-            print(character)
-            check_for_level_up_two(character)
-        elif answer.lower() == "a" or answer.lower() == "b" or answer.lower() == "c":
-            character[CURRENT_EGO_KEY] = character[CURRENT_EGO_KEY] - 50
-            print("Wrong! You lost 50 ego points. If you have no ego points left, you'll fail your final.")
-            print(character)
-            if character[CURRENT_EGO_KEY] == 0:
-                print("Answering all those questions incorrectly killed your ego.")
-                print(r"""
-
-                        ░██████╗░░█████╗░███╗░░░███╗███████╗  ░█████╗░██╗░░░██╗███████╗██████╗░
-                        ██╔════╝░██╔══██╗████╗░████║██╔════╝  ██╔══██╗██║░░░██║██╔════╝██╔══██╗
-                        ██║░░██╗░███████║██╔████╔██║█████╗░░  ██║░░██║╚██╗░██╔╝█████╗░░██████╔╝
-                        ██║░░╚██╗██╔══██║██║╚██╔╝██║██╔══╝░░  ██║░░██║░╚████╔╝░██╔══╝░░██╔══██╗
-                        ╚██████╔╝██║░░██║██║░╚═╝░██║███████╗  ╚█████╔╝░░╚██╔╝░░███████╗██║░░██║
-                        ░╚═════╝░╚═╝░░╚═╝╚═╝░░░░░╚═╝╚══════╝  ░╚════╝░░░░╚═╝░░░╚══════╝╚═╝░░╚═╝
-                """)
-        else:
-            print("That's not one of the answers genius. Try again!")
-            challenge_addition(character)
+        answer = get_valid_mc_answer()
+        return answer == "d"
     elif character[LEVEL_KEY] == 2:
         print("What is the integral of xsinx dx?")
         print("a: xcosx + sinx + c")
         print("b: xcosx - sinx + c")
         print("c: −xcosx + sinx + c")
         print("d: xcosx + sinx + c")
-        answer = input("Choose one of a, b, c, or d. Type your answer here:")
-        if answer.lower() == "c":
-            character[EXP_KEY] = character[EXP_KEY] + 50
-            print("Correct! Here's 50 EXP to help you prepare for your finals.")
-            print(character)
-            check_for_level_up_three(character)
-        elif answer.lower() == "a" or answer.lower() == "b" or answer.lower() == "d":
-            character[CURRENT_EGO_KEY] = character[CURRENT_EGO_KEY] - 50
-            print("Wrong! You lost 50 ego points.")
-            print(character)
-            if character[CURRENT_EGO_KEY] == 0:
-                print("Answering all those questions incorrectly killed your ego.")
-                print(r"""
-
-                                ░██████╗░░█████╗░███╗░░░███╗███████╗  ░█████╗░██╗░░░██╗███████╗██████╗░
-                                ██╔════╝░██╔══██╗████╗░████║██╔════╝  ██╔══██╗██║░░░██║██╔════╝██╔══██╗
-                                ██║░░██╗░███████║██╔████╔██║█████╗░░  ██║░░██║╚██╗░██╔╝█████╗░░██████╔╝
-                                ██║░░╚██╗██╔══██║██║╚██╔╝██║██╔══╝░░  ██║░░██║░╚████╔╝░██╔══╝░░██╔══██╗
-                                ╚██████╔╝██║░░██║██║░╚═╝░██║███████╗  ╚█████╔╝░░╚██╔╝░░███████╗██║░░██║
-                                ░╚═════╝░╚═╝░░╚═╝╚═╝░░░░░╚═╝╚══════╝  ░╚════╝░░░░╚═╝░░░╚══════╝╚═╝░░╚═╝
-                        """)
-        else:
-            print("That's not one of the answers genius. Try again!")
-            challenge_addition(character)
+        answer = get_valid_mc_answer()
+        return answer == "c"
 
 
 """This dictionary represents the classroom description as the key and the challenge function that corresponds with 
