@@ -66,6 +66,7 @@ def make_character():
     return {NAME_KEY: character_name, X_COORD_KEY: 0, Y_COORD_KEY: 0, CURRENT_EGO_KEY: 100, MAX_EGO_KEY: 100,
             LEVEL_KEY: 1, EXP_KEY: 0}
 
+
 def print_board(board, character):
     """
     Print game board that displays the character and classroom locations.
@@ -375,18 +376,29 @@ def challenge_integrals(character):
         answer = get_valid_mc_answer()
         return answer == "c"
 
+
 def fail_final():
+    """
+    This function ends the game if the character fails their final.
+
+    :return: exits game loop
+    """
     print("You answered one of the questions wrong... you failed CST.")
     print_game_over()
     sys.exit()
 
-def final_boss():
 
+def final_boss():
+    """
+    Ask character math questions for the final challenge of the game.
+
+    :return: a boolean representing whether the character failed the final or not
+    """
     print("Congratulations on getting to level 3! I think you're ready to tackle your final now."
           "For your final, you will meet with your instructor, Chris Thompson."
-          " You will have to answer three of his questions in a row correctly to pass..." 
+          " You will have to answer three of his questions in a row correctly to pass..."
           "If you get even one wrong, YOU FAIL.")
-    time.sleep(1)
+    time.sleep(3)
     print("You hear a light thumping sound walking down the hall and towards the room you're in."
           "You feel your heart clench and your stomach drop. If you fail this final, you fail CST.")
     time.sleep(2)
@@ -419,6 +431,7 @@ def final_boss():
     if answer != "c":
         fail_final()
 
+
 """This dictionary represents the classroom description as the key and the challenge function that corresponds with 
 the class. """
 CLASSES = {"Addition": challenge_addition, "Subtraction": challenge_subtraction,
@@ -429,8 +442,11 @@ CLASSES = {"Addition": challenge_addition, "Subtraction": challenge_subtraction,
 def make_board(rows, columns):
     """
     This function creates the board the player can traverse.
+
     :param rows: number of rows
     :param columns: number of columns
+    :precondition: rows and columns must be non-zero positive integers
+    :postcondition: create a game board
     :return: a map of the board as a dictionary where the key is the location and the value is the class description.
     """
     possible_locations = []
@@ -452,7 +468,6 @@ def make_board(rows, columns):
     for index in range(len(classroom_locations)):
         board[classroom_locations[index]] = class_descriptions[index]
     return board
-
 
 
 def get_character_location(character):
