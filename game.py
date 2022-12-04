@@ -396,16 +396,16 @@ def final_boss():
     """
     print("Congratulations on getting to level 3! I think you're ready to tackle your final now."
           "For your final, you will meet with your instructor, Chris Thompson."
-          " You will have to answer three of his questions in a row correctly to pass..."
-          "If you get even one wrong, YOU FAIL.")
+          "\nYou will have to answer three of his questions in a row correctly to pass..."
+          "\nIf you get even one wrong, YOU FAIL.")
     time.sleep(3)
     print("You hear a light thumping sound walking down the hall and towards the room you're in."
-          "You feel your heart clench and your stomach drop. If you fail this final, you fail CST.")
+          "\nYou feel your heart clench and your stomach drop. If you fail this final, you fail CST.")
     time.sleep(2)
     print("*Chris enters the room*")
     time.sleep(1)
     print("His eyes dart towards you and the corner of his lips begins to turns upwards into a sinister smile."
-          "In a booming voice, he asks you the first question...")
+          "\nIn a booming voice, he asks you the first question...")
     print("What is 360 x 6 + 24?")
     print("a: 2,184")
     print("b: 2,178")
@@ -450,7 +450,7 @@ def make_board(rows, columns):
     :return: a map of the board as a dictionary where the key is the location and the value is the class description.
     """
     possible_locations = []
-    # Generate all the possible location tuples
+    # Generate all the possible location
     for row in range(rows):
         for column in range(columns):
             possible_locations.append((column, row))
