@@ -23,6 +23,7 @@ def game():  # called from main
     character = make_character()
     achieved_goal = False
     while not achieved_goal:
+        print_board(board, character)
         describe_current_location(board, character)
         direction = get_user_choice()
         valid_move = validate_move(character, direction)
@@ -53,12 +54,34 @@ def game():  # called from main
     print("You have passed your final. Okay now... go and get some sleep. See you next term~")
 
 
+def print_board(board, character):
+    board_print_list = []
+    for key, value in board.items():
+        character_location = get_character_location(character)
+        if key == character_location:
+            board_print_list.append("X")
+        elif value != "empty room":
+            board_print_list.append("O")
+        else:
+            board_print_list.append("-")
+    print("".join(board_print_list[0:5]))
+    print("".join(board_print_list[5:10]))
+    print("".join(board_print_list[10:15]))
+    print("".join(board_print_list[15:20]))
+    print("".join(board_print_list[20:25]))
+
+
 def make_character():
+    """
+    Create character.
+
+    :return:
+    """
     character_name = input("Oh hey....buddy...welcome to finals season! "
                            "We've placed study sessions in classrooms \nthroughout the school for you to "
                            "prepare for finals! \n\nPlease write your name on this nametag *give you nametag* : ")
     return {NAME_KEY: character_name, X_COORD_KEY: 0, Y_COORD_KEY: 0, CURRENT_EGO_KEY: 100, MAX_EGO_KEY: 100,
-            LEVEL_KEY: 3, EXP_KEY: 0}
+            LEVEL_KEY: 1, EXP_KEY: 0}
 
 
 def check_for_level_up(character):
@@ -297,11 +320,6 @@ def final_boss():
         fail_final()
 
 
-
-
-
-
-
 """This dictionary represents the classroom description as the key and the challenge function that corresponds with 
 the class. """
 CLASSES = {"Addition": challenge_addition, "Subtraction": challenge_subtraction,
@@ -320,17 +338,16 @@ def make_board(rows, columns):
     # Generate all the possible location tuples
     for row in range(rows):
         for column in range(columns):
-            possible_locations.append((row, column))
+            possible_locations.append((column, row))
     # Generate a random selection of class locations for our classes
     possible_classroom_locations = possible_locations
     possible_classroom_locations.remove((0, 0))
     classroom_locations = random.sample(possible_classroom_locations, len(CLASSES))
-    print(classroom_locations)
     board = {}
     # Populate an "empty room" board with the keys being the location and the value being the description.
     for row in range(rows):
         for column in range(columns):
-            board[(row, column)] = "empty room"
+            board[(column, row)] = "empty room"
     # Replace all locations that have a class with the given class's description
     class_descriptions = list(CLASSES.keys())
     for index in range(len(classroom_locations)):
